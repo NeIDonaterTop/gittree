@@ -1,9 +1,21 @@
 var express = require('express');
 var router = express.Router();
-
-router.get('/list', function(req, res, next) { res.send("<h1>Страница Листа</h1>")});
-router.get('/koren', function(req, res, next) { res.send("<h1>Страница Корня</h1>")
-});
-router.get('/stvol', function(req, res, next) { res.send("<h1>Страница Ствола</h1>")
-});
+router.get('/list', function(req, res, next) {
+  res.render('tree', {
+  title: "Лист",
+  picture: "images/list.jpg",
+  desc: "Листок лепесток он удачный паренек"
+  }); });
+  router.get('/stvol', function(req, res, next) {
+    res.render('tree', {
+    title: "Ствол",
+    picture: "images/stvol.jpg",
+    desc: "Ствол это опора дерева"
+    }); });
+    router.get('/koren', function(req, res, next) {
+      res.render('tree', {
+      title: "Корень",
+      picture: "images/koren.jpg",
+      desc: "Корень питает дерево"
+      }); });
 module.exports = router;
