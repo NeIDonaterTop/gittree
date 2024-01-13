@@ -1,9 +1,10 @@
-var Tree = require("./../models/tree").Tree
-module.exports = function(req,res,next){
-res.locals.nav = []
-Tree.find(null,{_id:0,title:1,nick:1},function(err,result){
-if(err) throw err
-res.locals.nav = result
-next()
-})
-}
+const db = require('./../mySQLConnect'); // assuming MySQL database connection
+
+module.exports = function(req, res, next) {
+    res.locals.nav = [];
+    db.query('SELECT title, nick FROM trees', function(err, result) {
+        if (err) throw err;
+        res.locals.nav = result;
+        next();
+    });
+};
