@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Tree = require("../models/tree").Tree;
+var checkAuth = require("./../middleware/checkAuth.js")
 
 /* GET users listing. */
 router.get('/', (req, res) => {
@@ -8,7 +9,7 @@ router.get('/', (req, res) => {
 });
 
 /* Страница чая */
-router.get('/:nick', async (req, res, next) => {
+router.get('/:nick',checkAuth, async (req, res, next) => {
     try {
         const [tree, trees] = await Promise.all([
             Tree.findOne({ nick: req.params.nick }).exec(),

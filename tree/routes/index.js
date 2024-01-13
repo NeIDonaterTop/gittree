@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+var checkAuth = require("./../middleware/checkAuth.js")
 const Tree = require("../models/tree").Tree;
 var User = require("./../models/user").User
 
