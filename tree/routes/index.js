@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Tree = require("../models/tree").Tree;
+var User = require("./../models/user").User
 
 /* GET home page. */
 router.get('/', async (req, res, next) => {
@@ -12,10 +13,30 @@ router.get('/', async (req, res, next) => {
   }
 });
 router.get('/logreg', (req, res, next) => {
-  res.render('logreg', { title: 'Вход' });
-});
-router.post('/logreg', function(req, res, next) {
-  var username = req.body.username
-  var password = req.body.password
-});
+    res.render('logreg', { title: 'Вход' });
+  });
+  router.post('/logreg', async function(req, res, next) {
+    const username = req.body.username;
+    const password = req.body.password;
+    try {
+        const user = await User.findOne({ username });
+        
+        if (user) {
+            if (user.checkPassword(password)) {
+                req.session.user = user._id;
+                res.redirect('/');
+            } else {
+                res.render('logreg', { title: 'Вход', error: 'Неверный пароль' });
+            }
+        } else {
+            const newUser = new User({ username, password });
+            await newUser.save();
+            req.session.user = newUser._id;
+            res.redirect('/');
+        }
+    } catch (err) {
+        next(err);
+    }
+  });
+
 module.exports = router;
