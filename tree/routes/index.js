@@ -12,9 +12,9 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
-router.get('/logreg', (req, res, next) => {
-    res.render('logreg', { title: 'Вход' });
-  });
+router.get('/logreg', async function(req, res, next) {
+  res.render('logreg', { title: 'Вход',error:null}); 
+});
   router.post('/logreg', async function(req, res, next) {
     const username = req.body.username;
     const password = req.body.password;
