@@ -1,5 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb://localhost:27017/";
+var data = require("./data.js").data
+
 const client = new MongoClient(uri);
 
 async function run() {
