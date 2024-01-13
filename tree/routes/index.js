@@ -1,26 +1,17 @@
-var express = require('express');
-var router = express.Router();
-router.get('/', function(req, res, next) {
-  req.session.greeting = `Hi!!!`;
-  res.render('index', { title: 'Express', menu: menu });
+const express = require('express');
+const router = express.Router();
+const Tree = require("../models/tree").Tree;
+
+/* GET home page. */
+router.get('/', async (req, res, next) => {
+  try {
+    const menu = await Tree.find({}, { _id: 0, title: 1, nick: 1 });
+    req.session.greeting = "Hi!!!"
+    res.render('index', { title: 'Express', menu:menu, counter:req.session.counter });
+  } catch (err) {
+    next(err);
+  }
 });
 
-router.get('/list', function(req, res, next) {
-  res.render('tree', {
-  title: "Лист",
-  picture: "images/list.jpg",
-  desc: "Листок лепесток он удачный паренек"
-  }); });
-  router.get('/stvol', function(req, res, next) {
-    res.render('tree', {
-    title: "Ствол",
-    picture: "images/stvol.jpg",
-    desc: "Ствол это опора дерева"
-    }); });
-    router.get('/koren', function(req, res, next) {
-      res.render('tree', {
-      title: "Корень",
-      picture: "images/koren.jpg",
-      desc: "Корень питает дерево"
-      }); });
+
 module.exports = router;
