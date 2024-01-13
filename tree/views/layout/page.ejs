@@ -11,18 +11,12 @@
     <nav class="navbar navbar-expand-sm bg-light navbar-light">
         <div class="container-fluid">
         <ul class="navbar-nav">
-        <li class="nav-item">
-        <a class="nav-link" href="/">Главная</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="/tree/list">Лист</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="/tree/stvol">Ствол</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="/tree/koren">Корень</a>
-        </li>
+        <% menu.forEach(function(tree){ %>
+            <li class="nav-item">
+            <a class="nav-link"
+            href="/tree/<%=tree.nick%>"><%=tree.title%></a>
+            </li>
+            <% }) %>
         </ul>
         <ul class="navbar-nav navbar-right">
         <li>
