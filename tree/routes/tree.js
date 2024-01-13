@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../mySQLConnect.js');
+const async = require("async")
+
 router.get('/', function(req, res, next) {
 res.send('<h1>Это экран для списка частей дерева</h1>');
 });
