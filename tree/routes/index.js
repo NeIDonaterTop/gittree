@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+router.get('/', function(req, res, next) {
+  res.cookie('greeting', 'Hi!!!').render('index', { title: 'Express', menu:menu });
+  });
 router.get('/list', function(req, res, next) {
   res.render('tree', {
   title: "Лист",
